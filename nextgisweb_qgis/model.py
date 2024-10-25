@@ -37,6 +37,7 @@ from nextgisweb.resource import (
 )
 from nextgisweb.feature_layer import (
     IFeatureLayer,
+    DATABASE_TYPE,
     FIELD_TYPE as FIELD_TYPE,
     GEOM_TYPE as GEOM_TYPE,
     on_data_change as on_data_change_feature_layer,
@@ -214,7 +215,7 @@ class QgisVectorStyle(Base, Resource):
         extended, render_size, target_box = _render_bounds(
             extent, size, padding)
 
-        feature_query = self.parent.feature_query()
+        feature_query = self.parent.feature_query(db_role=DATABASE_TYPE.REPLICA)
 
         # Apply filter condition
         if cond is not None:
